@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./activitySelection.module.css";
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import axios from "axios";
 
 const ActivitySelectionPage = () => {
-    const activities = [
-        { id: 1, category: "준비", name: "💊 밑거름 시비" },
-        { id: 2, category: "준비", name: "🌱 파종" },
-        { id: 9, category: "준비", name: "🌱 육모"},
-        { id: 3, category: "준비", name: "🚜 로터리 작업" },
-        { id: 4, category: "준비", name: "🔨 비닐 터널 설치" },
-        { id: 5, category: "생육", name: "💊 1차 웃거름" },
-        { id: 6, category: "생육", name: "💊 2차 웃거름" },
-        { id: 10, category: "생육", name: "💦 관수/배수 관리" },
-        { id: 11, category: "생육", name: "⛏️ 김매기" },
-        { id: 7, category: "생육", name: "🦠 병해충 방제" },
-        { id: 12, category: "수확", name: "😄 잎따기 수확" },
-        { id: 8, category: "수확", name: "😄 본격 수확" },
-        { id: 13, category: "수확", name: "⛰️ 밭 정리" },
-        { id: 14, category: "수확", name: "💊 퇴비 추가" },
-        { id: 15, category: "휴식", name: "🏡 휴식" },
-        { id: 16, category: "휴식", name: "⚙️ 정비" },
-    ];
+    const [activities, setActivities] = useState([]);
 
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        const fetchActivities = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const selectedCrop = JSON.parse(localStorage.getItem("selectedCrop"));
+
+                if (!selectedCrop) {
+                    navigate("/diary/crop-selection");
+                    return;
+                }
+
+                const response = await axios.get(
+                    `http://43.201.122.113:8081/api/diary/tasks/${selectedCrop.id}`,
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "accept": "*/*"
+                        }
+                    }
+                );
+                setActivities(response.data);
+            } catch (error) {
+                console.error("작업 유형 조회 실패:", error);
+            }
+        };
+
+        fetchActivities();
+    }, [navigate]);
+
 
     const handleActivitySelection = (activity) => {
         localStorage.setItem("selectedActivity", JSON.stringify(activity)); // 로컬 스토리지 저장

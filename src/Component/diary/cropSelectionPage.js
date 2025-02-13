@@ -1,43 +1,58 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./cropSelectionPage.module.css";
-import {FaChevronLeft} from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import axios from "axios";
 
 const CropSelectionPage = () => {
-    const user = {
-        crops: [
-            { id: 1, name: "딸기", image: require("../Images/1.png") },
-            { id: 2, name: "상추", image: require("../Images/2.png") },
-            { id: 3, name: "벼", image: require("../Images/3.png") },
-            { id: 4, name: "딸기", image: require("../Images/1.png") },
-            { id: 5, name: "상추", image: require("../Images/2.png") },
-            { id: 6, name: "벼", image: require("../Images/3.png") },
-            { id: 1, name: "딸기", image: require("../Images/1.png") },
-            { id: 2, name: "상추", image: require("../Images/2.png") },
-
-
-        ],
-    };
-
     const navigate = useNavigate();
+    const [crops, setCrops] = useState([]);
     const [search, setSearch] = useState("");
 
-    // 선택한 작물  NewDiary 페이지에 전달
+    // 사용자 재배작물 조회
+    useEffect(() => {
+        const fetchDiary = () => {
+            const token = localStorage.getItem("token");
+            const userId = 1;
+
+
+            axios
+                .get('http://43.201.122.113:8081/api/diary/user-crops', {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "accept": "*/*",
+                    },
+                })
+                .then(response => {
+                    setCrops(response.data);
+                    console.log("일기 데이터:", response.data);
+                })
+                .catch(error => {
+                    console.error("일기 데이터 오류 :", error);
+                });
+        };
+        console.log("setCrops:",setCrops)
+        fetchDiary();
+    }, []);
+
+    // 작물 선택 핸들러
     const handleCropSelection = (crop) => {
-        localStorage.setItem("selectedCrop", JSON.stringify(crop)); // 로컬 스토리지 저장
+        localStorage.setItem("selectedCrop", JSON.stringify(crop));
         navigate("/diary/newDiary");
     };
 
-
+    // 검색어 변경 핸들러
     const onChange = (e) => {
         setSearch(e.target.value);
     };
 
-    const filteredCrops = user.crops.filter(crop =>
-        crop.name.toLowerCase().includes(search.toLowerCase())
+    // 작물 필터링
+    const filteredCrops = crops.filter(crop =>
+        crop.cropName.toLowerCase().includes(search.toLowerCase())
     );
 
+    // 3개씩 그룹화
     const chunkedItems = [];
     for (let i = 0; i < filteredCrops.length; i += 3) {
         chunkedItems.push(filteredCrops.slice(i, i + 3));
@@ -46,13 +61,16 @@ const CropSelectionPage = () => {
     return (
         <div className={style.cropSelectionPage}>
             <header className={style.cropSelectDiaryTitle}>
-                <FaChevronLeft className={style.cropSelectDiaryTitleIcon} onClick={() => navigate(-1)}/>
+                <FaChevronLeft
+                    className={style.cropSelectDiaryTitleIcon}
+                    onClick={() => navigate(-1)}
+                />
                 <p className={style.cropSelectDiaryTitleText}>기록할 작물 선택</p>
             </header>
-            <div className={style.cropSelectionTextbold}>
 
-            </div>
-            <p className={style.cropSelectTitleText}><strong>어떤 작물</strong>을 기록할까요?</p>
+            <p className={style.cropSelectTitleText}>
+                <strong>어떤 작물</strong>을 기록할까요?
+            </p>
 
             <div className={style.searchInputbox}>
                 <div className={style.searchInputWrapper}>
@@ -64,12 +82,11 @@ const CropSelectionPage = () => {
                         placeholder="작물 이름으로 검색  예)딸기"
                         className={style.searchInput}
                     />
-
                 </div>
             </div>
 
-
             <p className={style.mycropsListText}>내가 재배중인 작물</p>
+
             <div className={style.cropList}>
                 {filteredCrops.length === 0 ? (
                     <p>검색 결과가 없습니다.</p>
@@ -82,9 +99,13 @@ const CropSelectionPage = () => {
                                         className={style.cropItem}
                                         onClick={() => handleCropSelection(crop)}
                                     >
-                                        <img src={crop.image} alt={crop.name} className={style.cropImage} />
+                                        <img
+                                            src={`/images/${crop.cropName}.png`}
+                                            alt={crop.cropName}
+                                            className={style.cropImage}
+                                        />
                                     </div>
-                                    <p className={style.cropName}>{crop.name}</p>
+                                    <p className={style.cropName}>{crop.cropName}</p>
                                 </div>
                             ))}
                         </div>
