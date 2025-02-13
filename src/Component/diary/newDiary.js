@@ -42,6 +42,7 @@ const NewDiary = () => {
             formData.append("writeDate", startDate.toISOString().split('T')[0]);
             formData.append("userCropName", selectedCrop.cropName);
             formData.append("taskId", selectedActivity.id);
+            formData.append("content", text === placeholderText ? "" : text);
 
 
             const response = await axios.post(

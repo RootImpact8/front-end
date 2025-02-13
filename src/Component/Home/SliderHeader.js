@@ -15,14 +15,14 @@ const CropList = () => {
   const [crops, setCrops] = useState([]);
   const [error, setError] = useState(null);
 
-  // Mapping from crop names to image imports and numeric IDs
-  const cropDetails = {
-    딸기: { id: 1, image: one },
-    벼: { id: 2, image: two },
-    고추: { id: 3, image: three },
-    상추: { id: 4, image: four },
-    사과: { id: 5, image: five },
-    감자: { id: 6, image: six },
+  // Mapping from crop names to image imports
+  const cropImages = {
+    딸기: one,
+    벼: two,
+    고추: three,
+    상추: four,
+    사과: five,
+    감자: six,
   };
 
   useEffect(() => {
@@ -38,12 +38,11 @@ const CropList = () => {
           }
         );
         const interestCrops = response.data.interestCrops.slice(0, 3); // 최대 3개의 관심 작물
-        
-        // Map the response to include unique IDs and images
         setCrops(
-          interestCrops.map(cropName => ({
-            ...cropDetails[cropName], // Spread to get id and image
-            name: cropName,
+          interestCrops.map((crop) => ({
+            id: crop, // 임시 ID 값, 실제 구현에서는 고유 ID 필요
+            name: crop,
+            image: cropImages[crop], // Use the mapped image
           }))
         );
       } catch (error) {
@@ -59,7 +58,7 @@ const CropList = () => {
     <div className={style.cropListContainer}>
       <div className={style.sliderHeader_left}>
         <h3>관심 작물 동향</h3>
-        <p onClick={() => navigate("/all-crops")}>모든 작물 확인하기</p>
+        <p>모든 작물 확인하기</p>
       </div>
 
       {error ? (

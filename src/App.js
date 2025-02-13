@@ -27,6 +27,8 @@ import NewDiary from "./Component/diary/newDiary";
 import MyChoice from './Component/info/myChoice';
 import InterestCrops from './Component/info/InterestCrops';
 
+import Test2 from './Component/Home/test2';
+
 
 
 
@@ -64,6 +66,7 @@ function AppContent() {
           <Route path="/Test" element={<Test />} />
           <Route path="/MyChoice" element={<MyChoice />} />
           <Route path="/InterestCrops" element={<InterestCrops />} />
+          <Route path="/Test2" element={<Test2 />} />
         </Routes>
 
 

@@ -339,50 +339,10 @@ class Main extends Component {
           {/* ✅ 관심 작물 슬라이더 */}
           <SliderHeader/>
 
-          {weather === "true" ? (
-        <div>
-          <div className={style.warning_container}>
-            <img src={warning} alt="경고 이미지" />
-            <span className={style.warning_red}>이상기후</span>
-            <span>발생 경보</span>
-          </div>
-
-          <div className={style.abnormal_weather_modal}>
-            <div className={style.abnormal_weather_content}>
-              <img
-                src={cropImage}
-                alt="작물 보호 이미지"
-                className={style.crop_image}
-              />
-
-              <div className={style.text_container}>
-                <div className={style.abnormal_weather_header}>
-                  <span className={style.warning_red}>폭설 경보</span>
-                  <span> | 딸기 냉해 대비법</span>
-                </div>
-                <p className={style.crop_warning}>
-                  야간 온풍기 대기 온도
-                  <span className={style.highlight}> +1°</span>
-                </p>
-                <p className={style.crop_info}>최소 6도를 유지해요</p>
-              </div>
-            </div>
-
-            <button
-              className={style.detail_button}
-              onClick={() => this.props.navigate("/Detail")}
-            >
-              대처 방안 상세 보기 &gt;
-            </button>
-          </div>
-        </div>
-      ) : (
         <SliderMain
-          title="싹 AI의 추천 활동"
-          activities={this.state.activities}
-          slidesToShow={3}
+
         />
-      )}
+      
           <div>현재 농작물 도매가</div>
           {loading ? (
             <p>Loading data...</p>

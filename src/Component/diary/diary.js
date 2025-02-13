@@ -33,7 +33,7 @@ const Diary = () => {
     useEffect(() => {
         const fetchDiary = () => {
             const token = localStorage.getItem("token");
-            const userId = 1;
+            const userId = 2;
 
 
             axios
