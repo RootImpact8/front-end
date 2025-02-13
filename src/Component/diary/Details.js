@@ -90,7 +90,7 @@ const Details = () => {
         />
       </div>
 
-      <main>
+      <main className={style.main}>
         {loading ? (
           <Loading />
         ) : error ? (

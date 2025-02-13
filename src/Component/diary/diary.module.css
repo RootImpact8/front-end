@@ -2,6 +2,12 @@
 
 /*footer제외 하여 높이 조절*/
 html, body {height:100%}
+.logo{
+    height: 34px;
+    width: 38px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 .container{
     background-color: #1ba639;
     height:auto;
@@ -16,7 +22,7 @@ html, body {height:100%}
     align-items: center;
     background-color: #1ba639; /* 초록색 계열 */
     color: white;
-    padding: 10px 15px;
+    padding: 7px 0;
     height: 50px;
     border:none;
 }
@@ -119,4 +125,7 @@ html, body {height:100%}
 .write_button svg {
     color: white;
     font-size: 24px;
+}
+.crop_image{
+    width: 32px;
 }

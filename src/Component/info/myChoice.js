@@ -19,7 +19,6 @@ const MyChoice = () => {
         });
         setCrops(response.data); // 서버에서 받은 작물 데이터 설정
         console.log(response.data);
-        
       } catch (error) {
         console.error('Failed to fetch crops:', error);
       }
@@ -28,13 +27,14 @@ const MyChoice = () => {
   }, []);
 
   const handleCropSelection = (crop) => {
+    // 선택된 작물의 상태 업데이트 (선택된 상태를 유지)
     const newSelectedCrops = new Set(selectedCrops);
     if (newSelectedCrops.has(crop.name)) {
-      newSelectedCrops.delete(crop.name);
+      newSelectedCrops.delete(crop.name); // 이미 선택된 작물일 경우 선택 해제
     } else {
-      newSelectedCrops.add(crop.name);
+      newSelectedCrops.add(crop.name); // 선택되지 않은 작물일 경우 추가
     }
-    setSelectedCrops(Array.from(newSelectedCrops));
+    setSelectedCrops(Array.from(newSelectedCrops)); // 상태 업데이트
   };
 
   const onChange = (e) => {
@@ -42,7 +42,7 @@ const MyChoice = () => {
   };
 
   const filteredCrops = crops.filter(crop =>
-    crop.name.toLowerCase().includes(search.toLowerCase())
+      crop.name.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleSubmit = async () => {
@@ -54,56 +54,65 @@ const MyChoice = () => {
       cultivatedCrops: selectedCrops
     };
     try {
-        console.log(selectedCrops);
-        
+      console.log(selectedCrops);
       await axios.post(url, body, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
+      navigate('/diary/crops');
     } catch (error) {
       console.error('작물 등록 실패:', error);
     }
   };
 
   return (
-    <div className={style.cropSelectionPage}>
-      <header className={style.cropSelectDiaryTitle}>
-        <FaChevronLeft className={style.cropSelectDiaryTitleIcon} onClick={() => navigate(-1)}/>
-        <p className={style.cropSelectDiaryTitleText}>내 작물 선택</p>
-      </header>
+      <div className={style.cropSelectionPage}>
+        <header className={style.cropSelectDiaryTitle}>
+          <FaChevronLeft className={style.cropSelectDiaryTitleIcon} onClick={() => navigate(-1)} />
+          <p className={style.cropSelectDiaryTitleText}>내 작물 선택</p>
+        </header>
 
-      <p className={style.cropSelectTitleText}><strong>어떤 작물</strong>을 관리할까요?</p>
+        <p className={style.cropSelectTitleText}><strong>어떤 작물</strong>을 관리할까요?</p>
 
-      <div className={style.searchInputbox}>
-        <div className={style.searchInputWrapper}>
-          <FaSearch className={style.searchIcon}/>
-          <input
-            type="text"
-            value={search}
-            onChange={onChange}
-            placeholder="작물 이름으로 검색 예)딸기"
-            className={style.searchInput}
-          />
+        <div className={style.searchInputbox}>
+          <div className={style.searchInputWrapper}>
+            <FaSearch className={style.searchIcon} />
+            <input
+                type="text"
+                value={search}
+                onChange={onChange}
+                placeholder="작물 이름으로 검색 예)딸기"
+                className={style.searchInput}
+            />
+          </div>
         </div>
-      </div>
 
-      <p className={style.mycropsListText}>인기작물 TOP 6</p>
-      <div className={style.cropList}>
-        {filteredCrops.length === 0 ? (
-          <p>검색 결과가 없습니다.</p>
-        ) : (
-          filteredCrops.map((crop) => (
-            <div key={crop.id} onClick={() => handleCropSelection(crop)} className={style.cropItem}>
-              <img src={require(`../Images/${crop.id}.png`)} alt={crop.name} className={style.cropImage} />
-              <p className={style.cropName}>{crop.name}</p>
-            </div>
-          ))
-        )}
+        <p className={style.mycropsListText}>인기작물 TOP 6</p>
+        <div className={style.cropList}>
+          {filteredCrops.length === 0 ? (
+              <p>검색 결과가 없습니다.</p>
+          ) : (
+              filteredCrops.map((crop) => (
+                  <div key={crop.id}>
+                    <div
+                        onClick={() => handleCropSelection(crop)}
+                        className={`${style.cropItem} ${selectedCrops.includes(crop.name) ? style.selected : ''}`}
+                    >
+                      <img
+                          src={require(`../Images/${crop.id}.png`)}
+                          alt={crop.name}
+                          className={style.cropImage}
+                      />
+                    </div>
+                    <p className={style.cropName}>{crop.name}</p>
+                  </div>
+              ))
+          )}
+        </div>
+        <button onClick={handleSubmit} className={style.submitButton}>작물 등록하기</button>
       </div>
-      <button onClick={handleSubmit} className={style.submitButton}>작물 등록하기</button>
-    </div>
   );
 };
 

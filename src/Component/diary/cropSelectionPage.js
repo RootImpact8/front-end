@@ -9,6 +9,17 @@ const CropSelectionPage = () => {
     const navigate = useNavigate();
     const [crops, setCrops] = useState([]);
     const [search, setSearch] = useState("");
+    const [plantingDates, setPlantingDates] = useState({});
+
+    // cropIMG 객체
+    const cropIMG = {
+        "딸기": require("../Images/1.png"),
+        "벼": require("../Images/2.png"),
+        "감자": require("../Images/3.png"),
+        "상추": require("../Images/4.png"),
+        "사과": require("../Images/5.png"),
+        "고추": require("../Images/6.png"),
+    };
 
     // 사용자 재배작물 조회
     useEffect(() => {
@@ -32,9 +43,10 @@ const CropSelectionPage = () => {
                     console.error("일기 데이터 오류 :", error);
                 });
         };
-        console.log("setCrops:",setCrops)
+        console.log("setCrops:",crops)
         fetchDiary();
     }, []);
+
 
     // 작물 선택 핸들러
     const handleCropSelection = (crop) => {
@@ -100,7 +112,7 @@ const CropSelectionPage = () => {
                                         onClick={() => handleCropSelection(crop)}
                                     >
                                         <img
-                                            src={`/images/${crop.cropName}.png`}
+                                            src={cropIMG[crop.cropName]}
                                             alt={crop.cropName}
                                             className={style.cropImage}
                                         />

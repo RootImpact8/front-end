@@ -25,11 +25,32 @@ const NewDiary = () => {
             { id: 3, name: "벼", image: thr },
         ],
     };
+    // useEffect(() => {
+    //     setFormData(new FormData()); // 페이지 변경 시 초기화
+    // }, [location.pathname]);
 
     const location = useLocation();
     const [selectedCrop, setSelectedCrop] = useState(location.state?.crop || null);
     const [selectedActivity, setSelectedActivity] = useState(location.state?.activity || null);
     const [showModal, setShowModal] = useState(false);
+
+    const clearLocalStorage = () => {
+        localStorage.removeItem("selectedCrop");
+        localStorage.removeItem("selectedActivity");
+    };
+
+    // 페이지 이동 처리
+    const handleNavigate2 = () => {
+        setShowModal(true);
+    };
+
+    const confirmNavigate2 = () => {
+        clearLocalStorage(); // 데이터 삭제
+        setShowModal(false);
+        navigate("/diary");
+    };
+
+
 
     const navigate = useNavigate();
     const handleSubmit = async () => {
@@ -42,6 +63,7 @@ const NewDiary = () => {
             formData.append("writeDate", startDate.toISOString().split('T')[0]);
             formData.append("userCropName", selectedCrop.cropName);
             formData.append("taskId", selectedActivity.id);
+            formData.append("content", text === placeholderText ? "" : text);
 
 
             const response = await axios.post(
@@ -56,7 +78,9 @@ const NewDiary = () => {
             );
 
             if (response.status === 200) {
+                clearLocalStorage()
                 alert("일기가 성공적으로 등록되었습니다.");
+
                 navigate("/diary");
             }
         } catch (error) {
@@ -100,7 +124,7 @@ const NewDiary = () => {
                 <div className={style.modalOverlay}>
                     <div className={style.modalContent}>
                         <h3>주의</h3>
-                        <p>이 페이지를 나가면 기록한 내용이 모두 삭제됩니다.</p>
+                        <p>이 페이지를 나가도 선택한 작물/활동은 임시저장됩니다.</p>
                         <div className={style.modalButtons}>
                             <button onClick={() => setShowModal(false)}>계속하기</button>
                             <button onClick={confirmNavigate}>나가기</button>

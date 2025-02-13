@@ -40,7 +40,6 @@ class Main extends Component {
       longitude: null,
       locationInfo: null,
       error: null,
-      error: null,
       currentDate: this.getCurrentDate(),
       abnormalWeather: null,
       cropWarning: "",

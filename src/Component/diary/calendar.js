@@ -14,29 +14,7 @@ const CalendarComponent = ({ diaryDateData }) => {
 
     console.log(selectedDate);
     console.log("캘린더 데이터", diaryDateData);
-    const diaryData = [
-        {
-            date: "2025-02-19",
-            title: "휴식",
-            icon: "🏡",
-            time: "AM 08:00",
-            crop: "딸기",
-            details: "온풍기 20 정도 유지...",
-            temperature: "12℃ / 4℃",
-            weather: "☀️",
-        },
-        {
-            date: "2025-02-20",
-            title: "수확",
-            icon: "🌱",
-            time: "PM 14:00",
-            crop: "상추",
-            details: "수분 조절 필요",
-            temperature: "15℃ / 5℃",
-            weather: "🌤️",
-        },
 
-];
 
     // 날짜 형식 변경 (ex: 19.수)
     const formatDate = (dateStr) => {
@@ -79,7 +57,7 @@ const CalendarComponent = ({ diaryDateData }) => {
                 fixedWeekCount={false}
                 titleFormat={{ year: "numeric", month: "numeric" }}
                 events={diaryDateData.map((event) => ({
-                    title: event.taskCategory,
+                    title: "event.taskCategory",
                     date: event.writeDate,
                     extendedProps: {
                         icon: event.icon,
@@ -104,7 +82,7 @@ const CalendarComponent = ({ diaryDateData }) => {
                     else if (taskCategory === "생육") colorClass = "event-yellow";
 
                     return (
-                        <div className={`event-box ${colorClass}`}>{taskCategory}</div>
+                        <div className={`event-box ${colorClass}`}></div>
 
                     );
 

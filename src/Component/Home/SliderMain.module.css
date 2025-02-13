@@ -17,7 +17,7 @@
     gap: 15px;
     overflow-x: auto; /* ✅ 가로 스크롤 허용 */
     scroll-behavior: smooth;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     padding-bottom: 10px;
 }
 
