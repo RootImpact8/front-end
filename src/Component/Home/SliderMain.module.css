@@ -59,36 +59,44 @@
     width: 44px;
     height: 28px;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 
-.harvest {
-    background-color: #ff4d4d;
+.summary {
+    width: 90%;
+    margin-left: 10px;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
 }
 
-.fertilizer {
-    background-color: #ffcc00;
-}
-/* ✅ '모든 추천 확인하기' 버튼 → 배경 삭제 */
-.view_all_button {
-    text-decoration: underline;
-    color: #78777B;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30vw;
-    min-width: 250px;
-    height: 80px;
-    flex-shrink: 0;
-    order: 999;
-    background: none;
-    border: none; /* ✅ 테두리 제거 */
+/* Style for the dropdown */
+.dropdown {
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  appearance: none; /* Removes default system dropdown style */
+  cursor: pointer;
+  font-size: 16px; /* Adjust as needed */
+  color: #333; /* Dark gray text color */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  /* Adding a custom arrow indicator */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M7%2010l5%205%205-5H7z%22%20fill%3D%22%23AAB4BE%22/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
 
-.view_all_button:hover {
-    background-color: transparent; /* ✅ 호버 시 배경도 투명 유지 */
+/* Hover and Focus styles */
+.dropdown:hover,
+.dropdown:focus {
+  border-color: #888; /* Darker border on hover/focus */
+  box-shadow: 0 0 8px rgba(0,0,0,0.1); /* Soft shadow for focus */
+  outline: none; /* Remove the default focus outline */
 }
 

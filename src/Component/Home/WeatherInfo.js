@@ -22,6 +22,7 @@ class WeatherInfo extends Component {
       error: null,
       maxTemp: localStorage.getItem('maxTemp') || null,
       minTemp: localStorage.getItem('minTemp') || null,
+      weather: null,
     };
   }
 
