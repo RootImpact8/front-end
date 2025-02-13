@@ -4,11 +4,16 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./calendar.css";
 
-const CalendarComponent = () => {
+const CalendarComponent = ({ diaryDateData }) => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const eventDetailsRef = useRef(null);
 
+
+    console.log("selectedEvent",selectedEvent);
+
+    console.log(selectedDate);
+    console.log("캘린더 데이터", diaryDateData);
     const diaryData = [
         {
             date: "2025-02-19",
@@ -50,10 +55,13 @@ const CalendarComponent = () => {
     const handleDateClick = (arg) => {
         const formattedDate = formatDate(arg.dateStr);
         setSelectedDate(formattedDate);
+        console.log("클릭한 날짜:", arg.dateStr);
+        console.log("전체 데이터:", diaryDateData);
 
         // 선택한 날짜에 해당하는 이벤트 검색
-        const event = diaryData.find((e) => e.date === arg.dateStr);
+        const event = diaryDateData.find((e) => e.writeDate === arg.dateStr);
         setSelectedEvent(event || null);
+        console.log("찾은 이벤트:", event);
 
         setTimeout(() => {
             if (eventDetailsRef.current) {
@@ -61,7 +69,7 @@ const CalendarComponent = () => {
             }
         }, 100);
     };
-
+    console.log()
     return (
         <div>
             <FullCalendar
@@ -70,24 +78,38 @@ const CalendarComponent = () => {
                 locale="ko"
                 fixedWeekCount={false}
                 titleFormat={{ year: "numeric", month: "numeric" }}
-                events={diaryData.map((event) => ({ title: event.title, date: event.date }))}
+                events={diaryDateData.map((event) => ({
+                    title: event.taskCategory,
+                    date: event.writeDate,
+                    extendedProps: {
+                        icon: event.icon,
+                        time: event.time,
+                        crop: event.crop,
+                        details: event.details,
+                        temperature: event.temperature,
+                        weather: event.weather
+                    }
+                }))}
                 dateClick={handleDateClick}
                 dayCellContent={handleDayCellContent}
                 height="auto"
                 dayMaxEventRows={true}
-
                 eventContent={(arg) => {
                     let colorClass = "";
-                    if (arg.event.title === "수확") colorClass = "event-red";
-                    else if (arg.event.title === "휴식") colorClass = "event-green";
-                    else if (arg.event.title === "비료") colorClass = "event-yellow";
+                    const taskCategory = arg.event.title;
+
+                    if (taskCategory === "수확") colorClass = "event-red";
+                    else if (taskCategory === "휴식") colorClass = "event-blue";
+                    else if (taskCategory === "준비") colorClass = "event-green";
+                    else if (taskCategory === "생육") colorClass = "event-yellow";
 
                     return (
-                        <div className={`event-box ${colorClass}`}>
-                            {arg.event.title}
-                        </div>
+                        <div className={`event-box ${colorClass}`}>{taskCategory}</div>
+
                     );
+
                 }}
+
                 //캘린더 타이틀에 따라 색지정
             />
 
@@ -108,16 +130,16 @@ const CalendarComponent = () => {
                     {/* 이벤트 상세 내용 */}
                     {selectedEvent ? (
                         <div className="event-card">
-                            <div className="crop_name">작물: {selectedEvent.crop}</div>
+                            <div className="crop_name">작물: {selectedEvent.cropName}</div>
                             <p className="event-time">{selectedEvent.time}</p>
                             <div className="event-content">
                                 <div className="event-description">
-                                    <span className="event-icon">{selectedEvent.icon}</span>
-                                    <p className="event-title">{selectedEvent.title}</p>
+                                    {/*<span className="event-icon">{selectedEvent.extendedProps.icon}</span>*/}
+                                    <p className="event-title">{selectedEvent.taskName}</p>
                                 </div>
 
                                 {/*<p className="event-crop">작물: {selectedEvent.crop}</p>*/}
-                                <p className="event-details">{selectedEvent.details}</p>
+                                <p className="event-details">{selectedEvent.content}</p>
                             </div>
                         </div>
                     ) : (

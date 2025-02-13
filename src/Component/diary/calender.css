@@ -131,6 +131,9 @@ p.event-time {
 
 .event-red {
     background-color: red;
+    border: none;
+    width: 5px;
+    height: 5px;
 }
 
 .event-green {
@@ -139,6 +142,10 @@ p.event-time {
 
 .event-yellow {
     background-color: yellow;
+}
+
+.event-blue{
+    background-color: blue;
 }
 /*캘린더 기본 배경색 제거*/
 a.fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-block-event.fc-h-event {

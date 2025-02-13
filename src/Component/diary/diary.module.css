@@ -98,3 +98,25 @@ html, body {height:100%}
     padding: 25px;
     border-radius: 20px 20px 0 0;
 }
+
+
+.write_button {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.write_button svg {
+    color: white;
+    font-size: 24px;
+}

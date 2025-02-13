@@ -12,6 +12,7 @@ import { FaCamera } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/locale';
+import axios from "axios";
 
 const NewDiary = () => {
 
@@ -31,7 +32,38 @@ const NewDiary = () => {
     const [showModal, setShowModal] = useState(false);
 
     const navigate = useNavigate();
+    const handleSubmit = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const formData = new FormData();
 
+            // 필수 데이터 설정
+            formData.append("userId", 1); // 현재 로그인한 사용자 ID
+            formData.append("writeDate", startDate.toISOString().split('T')[0]);
+            formData.append("userCropName", selectedCrop.cropName);
+            formData.append("taskId", selectedActivity.id);
+
+
+            const response = await axios.post(
+                "http://43.201.122.113:8081/api/diary",
+                formData,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                alert("일기가 성공적으로 등록되었습니다.");
+                navigate("/diary");
+            }
+        } catch (error) {
+            console.error("일기 등록 실패:", error);
+            alert("일기 등록에 실패했습니다.");
+        }
+    };
     useEffect(() => {
         const savedCrop = JSON.parse(localStorage.getItem("selectedCrop"));
         const savedActivity = JSON.parse(localStorage.getItem("selectedActivity")); // 추가
@@ -158,8 +190,11 @@ const NewDiary = () => {
                     <div className={style.cameraButton_Text}><FaCamera className={style.cameraButtonIcon}/>(선택)사진 첨부하기</div>
                 </button>
 
-                <button className={`${style.registerButton} ${isFormComplete ? style.activeButton : ""}`}
-                        disabled={!isFormComplete}>
+                <button
+                    className={`${style.registerButton} ${isFormComplete ? style.activeButton : ""}`}
+                    disabled={!isFormComplete}
+                    onClick={handleSubmit}  // handleSubmit 함수 추가
+                >
                     <div className={style.registerButton_Text}>일지 등록하기</div>
                 </button>
 
