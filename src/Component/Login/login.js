@@ -31,7 +31,7 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("id", id);
 
-      navigate("/");
+      navigate("/Home");
     } catch (error) {
       setErrorMessage("로그인에 실패했습니다. 이메일과 비밀번호를 확인하세요.");
       console.error("로그인 오류:", error.response ? error.response.data : error.message);

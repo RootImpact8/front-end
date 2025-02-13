@@ -54,6 +54,8 @@ const Details = () => {
         });
         setNews(response.data.news); // 가정: 데이터는 'news' 필드를 가짐
         setLoading(false);
+        console.log(response.data);
+        
       } catch (error) {
         console.error("Error fetching news:", error);
         setError("Failed to load news");
@@ -96,7 +98,7 @@ const Details = () => {
         ) : error ? (
           <p>{error}</p>
         ) : (
-          <p className="mt-2 text-gray-600">{news || "No news available."}</p>
+          <p className="mt-2 text-gray-600"><div style={{ whiteSpace: 'pre-wrap' }}>{news || "No news available."}</div></p>
         )}
       </main>
       <Footer />

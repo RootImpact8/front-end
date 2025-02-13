@@ -18,8 +18,8 @@ const Footer = () => {
                 <img src={pathname === '/diary' ? book_true : book} alt='Book Icon' />
                 <span>영농일지</span>
             </div>
-            <div onClick={() => navigate('/')}> 
-                <img src={pathname === '/' ? home_true : home} alt='Home Icon' />
+            <div onClick={() => navigate('/Home')}> 
+                <img src={pathname === '/Home' ? home_true : home} alt='Home Icon' />
                 <span>홈</span>
             </div>
             <div onClick={() => navigate('/info')}> 

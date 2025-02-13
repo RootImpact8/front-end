@@ -49,13 +49,13 @@ function AppContent() {
   return (
       <div style={{ backgroundColor: "#F0F0F0", minHeight: "100vh" }}>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Login />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/info" element={<Info />} />
           <Route path="/InfoNext1" element={<InfoNext1 />} />
           <Route path="/InfoNext2" element={<InfoNext2 />} />
           <Route path="/details/:date" element={<Details />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Home" element={<Main />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/Detail" element={<Detail />} />
           <Route path="/diary/crops" element={<Diary_crops />} />

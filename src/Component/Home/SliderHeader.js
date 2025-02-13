@@ -9,13 +9,22 @@ import three from "../Images/3.png";
 import four from "../Images/4.png";
 import five from "../Images/5.png";
 import six from "../Images/6.png";
-
 const CropList = () => {
   const navigate = useNavigate();
   const [crops, setCrops] = useState([]);
   const [error, setError] = useState(null);
 
-  // Mapping from crop names to image imports
+  // 작물 이름과 ID 매핑
+  const cropIDs = {
+    딸기: 1,
+    벼: 2,
+    고추: 3,
+    상추: 4,
+    사과: 5,
+    감자: 6,
+  };
+
+  // 작물 이미지 매핑
   const cropImages = {
     딸기: one,
     벼: two,
@@ -29,22 +38,17 @@ const CropList = () => {
     const fetchCrops = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await axios.get(
-          "http://43.201.122.113:8081/api/user-info/user-crops",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("http://43.201.122.113:8081/api/user-info/user-crops", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const interestCrops = response.data.interestCrops.slice(0, 3); // 최대 3개의 관심 작물
-        setCrops(
-          interestCrops.map((crop) => ({
-            id: crop, // 임시 ID 값, 실제 구현에서는 고유 ID 필요
-            name: crop,
-            image: cropImages[crop], // Use the mapped image
-          }))
-        );
+        setCrops(interestCrops.map(cropName => ({
+          id: cropIDs[cropName], // 작물 이름에 따른 ID 사용
+          name: cropName,
+          image: cropImages[cropName],
+        })));
       } catch (error) {
         console.error("Failed to fetch crops:", error);
         setError("Failed to load crops");
@@ -64,7 +68,7 @@ const CropList = () => {
       {error ? (
         <p>{error}</p>
       ) : (
-        crops.map((crop) => (
+        crops.map(crop => (
           <div
             key={crop.id}
             className={style.cropItem}

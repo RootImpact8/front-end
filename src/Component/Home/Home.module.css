@@ -236,3 +236,10 @@ width: 6px;
   background-color: #ff4f4f;
 }
 
+.home_chart_container {
+  padding-left: 20px;
+}
+.home_chart_title {
+  margin-left: 20px;
+  font-size: 18px;
+}

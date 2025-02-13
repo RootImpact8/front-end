@@ -35,6 +35,8 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      priceDataA: [],
+      priceDataB: [],
       location: "",
       latitude: null,
       longitude: null,
@@ -223,7 +225,8 @@ class Main extends Component {
     arrows: false,
   };
   componentDidMount() {
-    this.fetchPrice();
+    this.fetchPrice(1, 'priceDataA');
+    this.fetchPrice(3, 'priceDataB');
     this.fetchLocationInfo();
   }
 
@@ -260,6 +263,7 @@ class Main extends Component {
       });
       // Extract price data from the response
       const prices = response.data.priceData.map((data) => data.price);
+      
       const minPrice = Math.min(...prices);
       const maxPrice = Math.max(...prices);
 
@@ -279,6 +283,7 @@ class Main extends Component {
     const token = localStorage.getItem("token");
     const { location, priceInfo, minPrice, maxPrice, loading, error } =
       this.state;
+      
     const url = "http://43.201.122.113:8081/api/farm/price?cropName=딸기";
     const urlSplit = url.split("=");
     const price = urlSplit[urlSplit.length - 1];
@@ -342,13 +347,13 @@ class Main extends Component {
 
         />
       
-          <div>현재 농작물 도매가</div>
+          <div className={style.home_chart_title}>현재 농작물 도매가</div>
           {loading ? (
             <p>Loading data...</p>
           ) : error ? (
             <p>Error: {error}</p>
           ) : (
-            <div>
+            <div className={style.home_chart_container}>
               <p>{price} 1Kg당</p>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart
@@ -357,8 +362,8 @@ class Main extends Component {
                 >
                   <defs>
                     <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#FFFFFF" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#1ba639" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <XAxis dataKey="date" />
@@ -368,7 +373,7 @@ class Main extends Component {
                   <Area
                     type="monotone"
                     dataKey="price"
-                    stroke="#8884d8"
+                    stroke="#02fa38"
                     fillOpacity={1}
                     fill="url(#colorPrice)"
                   />
