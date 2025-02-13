@@ -1,0 +1,228 @@
+.newDiaryc{
+    background-color: white;
+    height: 100vh;
+}
+.DiaryTitle{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.DiaryTitleIcon{
+    margin-left: 21px;
+    cursor: pointer;
+}
+
+.selectCrop{
+    color: #78777B;
+}
+.selectWork{
+    color: #78777B;
+}
+
+.DiaryTitleText{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 16px 21px 16px 0;
+
+}
+
+.newDiary_Item{
+    display: flex;
+    padding: 0 16px;
+    flex-direction: column;
+
+}
+.newDiaryTitleDate{
+    display: flex;
+    font-size: 24px;
+    margin: 45px 25px 20px;
+}
+.newDiary_dayBold{
+    font-weight: bold;
+    margin-right: 7px;
+}
+.newDiary_date,
+.newDiary_WeatherDetail,
+.selectCrop,
+.selectWork{
+    display: flex;
+    background-color: #F2F4F7;
+    border-radius: 8px;
+    font-size: 18px;
+    align-items: center;
+    padding: 0 15px;
+    justify-content: space-between;
+    height: 60px;
+    margin: 10px 0;
+}
+.newDiary_dateButton{
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: #78777B;
+}
+.newDiary_TextBox{
+    display: flex;
+    background-color: #F2F4F7;
+    border-radius: 8px;
+    font-size: 18px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
+    border: none;
+    height: 150px;
+    color: #78777B;
+
+}
+.textPlaceholder {
+    color: #78777B;
+}
+
+.textEntered {
+    color: black;
+}
+.selectCrop_detail{
+    display: flex;
+    align-items: center;
+}
+.WeatherNotice{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.newDiary_WeatherDetail{
+    margin-bottom: 0;
+}
+.WeatherNotice_text{
+    margin:3px 0 10px 0;
+    color: #78777B;
+}
+.cameraButton{
+    background-color: #e0f7e9;
+    border: 1px solid #4caf50;
+    color: #000000;
+    padding: 8px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 56px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+
+}
+.cameraButton_Text{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cameraButtonIcon{
+    margin: 5px;
+}
+
+.registerButton{
+    position: fixed;
+    bottom: 10px;
+    background-color: #E3E6ED;
+    border: none;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 92%;
+    height: 56px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    justify-content: center;
+
+}
+
+.selectedCropImage{
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+}
+
+.activeButton{
+    position: fixed;
+    bottom: 10px;
+    background-color: #1BA639;
+    border: none;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 92%;
+    height: 56px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    justify-content: center;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: white;
+    padding: 20px;
+    width: 282px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.modalButtons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.modalButtons button:first-child {
+    background: #F2F4F7;
+    color: #606060;
+    width: 130px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 16px;
+}
+
+.modalButtons button:last-child {
+    background: rgba(251, 117, 118, 0.5);
+    width: 130px;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 16px;
+    color: #FF4A4C;
+
+}
+
+/*DatePicker  커스텀*/

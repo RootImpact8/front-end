@@ -1,0 +1,116 @@
+.p {
+    font-size: 16px;
+}
+
+.activitySelectionPage {
+    background-color: white;
+    height: 100vh;
+}
+
+.activitySelectDiaryTitle {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.activitySelectDiaryTitleText {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 16px 21px 16px 0;
+}
+
+.activitySelectDiaryTitleIcon {
+    margin-left: 21px;
+}
+
+.activitySelectionPage {
+    text-align: center;
+}
+
+.activitySelectTitleText {
+    font-size: 24px;
+    text-align: left;
+    margin: 45px 25px 20px;
+}
+
+.activityList {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 25px;
+}
+
+.activityItem {
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 8px 11px;
+    width: auto;
+    height: 19px;
+    background-color: #F6F6F8;
+    border: 1px solid #727272;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+
+.activityItem:hover {
+    transform: scale(1.05);
+}
+
+
+
+.searchInputWrapper {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #F2F4F7;
+    margin-bottom: 20px;
+    width: 90%;
+}
+
+.searchInputbox {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.searchIcon {
+    font-size: 1.2rem;
+    margin: 10px;
+    color: black;
+}
+
+.searchInput {
+    width: 90%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px;
+    color: black;
+    background-color: #F2F4F7;
+}
+
+.myActivitiesListText {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin: 30px 25px;
+}
+
+.activityName {
+    margin: 10px 0;
+}
+
+.categoryTitle{
+    text-align: left;
+    margin-left: 23px;
+    font-size: 18px;
+}
