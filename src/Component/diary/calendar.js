@@ -9,13 +9,6 @@ const CalendarComponent = ({ diaryDateData }) => {
     const [selectedEvent, setSelectedEvent] = useState(null);
     const eventDetailsRef = useRef(null);
 
-
-    console.log("selectedEvent",selectedEvent);
-
-    console.log(selectedDate);
-    console.log("캘린더 데이터", diaryDateData);
-
-
     // 날짜 형식 변경 (ex: 19.수)
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
@@ -33,10 +26,8 @@ const CalendarComponent = ({ diaryDateData }) => {
     const handleDateClick = (arg) => {
         const formattedDate = formatDate(arg.dateStr);
         setSelectedDate(formattedDate);
-        console.log("클릭한 날짜:", arg.dateStr);
-        console.log("전체 데이터:", diaryDateData);
 
-        // 선택한 날짜에 해당하는 이벤트 검색
+        // 선택한 날짜의 첫 번째 이벤트를 기준점으로 설정
         const event = diaryDateData.find((e) => e.writeDate === arg.dateStr);
         setSelectedEvent(event || null);
         console.log("찾은 이벤트:", event);
@@ -47,7 +38,7 @@ const CalendarComponent = ({ diaryDateData }) => {
             }
         }, 100);
     };
-    console.log()
+
     return (
         <div>
             <FullCalendar
@@ -57,7 +48,7 @@ const CalendarComponent = ({ diaryDateData }) => {
                 fixedWeekCount={false}
                 titleFormat={{ year: "numeric", month: "numeric" }}
                 events={diaryDateData.map((event) => ({
-                    title: "event.taskCategory",
+                    title: event.taskCategory,
                     date: event.writeDate,
                     extendedProps: {
                         icon: event.icon,
@@ -68,10 +59,11 @@ const CalendarComponent = ({ diaryDateData }) => {
                         weather: event.weather
                     }
                 }))}
+                dayMaxEventRows={true}
+                dayMaxEvents={2}
                 dateClick={handleDateClick}
                 dayCellContent={handleDayCellContent}
                 height="auto"
-                dayMaxEventRows={true}
                 eventContent={(arg) => {
                     let colorClass = "";
                     const taskCategory = arg.event.title;
@@ -82,44 +74,41 @@ const CalendarComponent = ({ diaryDateData }) => {
                     else if (taskCategory === "생육") colorClass = "event-yellow";
 
                     return (
-                        <div className={`event-box ${colorClass}`}></div>
-
+                        <div className={`event-box ${colorClass}`}>{taskCategory}</div>
                     );
-
                 }}
-
-                //캘린더 타이틀에 따라 색지정
             />
 
             {selectedDate && (
                 <div ref={eventDetailsRef} className="event-details">
-                    {/* 날짜 및 날씨 정보 */}
+                    {/* 날짜 헤더 */}
                     <div className="event-header">
                         <div className="event-header-detail">
                             <h3>{selectedDate}</h3>
                             <p className="recent-label">1일 전, 가장 최근</p>
                         </div>
-
-                        <p className="weather-info">
-                        {selectedEvent?.temperature} {selectedEvent?.weather}
-                        </p>
                     </div>
 
-                    {/* 이벤트 상세 내용 */}
-                    {selectedEvent ? (
-                        <div className="event-card">
-                            <div className="crop_name">작물: {selectedEvent.cropName}</div>
-                            <p className="event-time">{selectedEvent.time}</p>
-                            <div className="event-content">
-                                <div className="event-description">
-                                    {/*<span className="event-icon">{selectedEvent.extendedProps.icon}</span>*/}
-                                    <p className="event-title">{selectedEvent.taskName}</p>
-                                </div>
+                    {/* 해당 날짜의 모든 이벤트 표시 */}
+                    {diaryDateData.filter(event => event.writeDate === selectedEvent?.writeDate).length > 0 ? (
+                        diaryDateData
+                            .filter(event => event.writeDate === selectedEvent?.writeDate)
+                            .map((event, index) => (
+                                <div key={index} className="event-card">
 
-                                {/*<p className="event-crop">작물: {selectedEvent.crop}</p>*/}
-                                <p className="event-details">{selectedEvent.content}</p>
-                            </div>
-                        </div>
+                                    <div className="crop_name">작물: {event.cropName}</div>
+                                    <div>
+                                        <p className="event-time">{event.time}</p>
+                                        <div className="event-content">
+                                            <div className="event-description">
+                                                <p className="event-title">{event.taskName}</p>
+                                            </div>
+                                            <p className="event-details">{event.content}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            ))
                     ) : (
                         <p className="no-event">이 날짜에는 이벤트가 없습니다.</p>
                     )}

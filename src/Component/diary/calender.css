@@ -182,22 +182,36 @@ a.fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygr
     padding: 0 !important;
     margin: 0 auto !important;
     overflow: hidden; /* 혹시라도 남은 내용 숨기기 */
-    text-indent: -9999px; /* 텍스트 숨기기 */
+
+}
+
+.fc-daygrid-day {
+    pointer-events: auto;
+}
+
+.event-box {
+    pointer-events: none !important;
+}
+
+
+.fc-daygrid-event-harness {
+    pointer-events: none !important;
 }
 
 /* 카테고리별 스타일 적용 */
 .event-red {
-    background-color: red !important;
+    background-color: #E54D11 !important;
 }
 
 .event-blue {
-    background-color: blue !important;
+    background-color: #1C84E5 !important;
 }
 
 .event-green {
-    background-color: green !important;
+    background-color: #1BA639 !important;
 }
 
 .event-yellow {
-    background-color: yellow !important;
+    background-color: #F6AF2B !important;
+    color:black !important;
 }

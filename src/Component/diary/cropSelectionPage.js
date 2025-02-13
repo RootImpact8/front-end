@@ -9,24 +9,11 @@ const CropSelectionPage = () => {
     const navigate = useNavigate();
     const [crops, setCrops] = useState([]);
     const [search, setSearch] = useState("");
-    const [plantingDates, setPlantingDates] = useState({});
 
-    // cropIMG 객체
-    const cropIMG = {
-        "딸기": require("../Images/1.png"),
-        "벼": require("../Images/2.png"),
-        "감자": require("../Images/3.png"),
-        "상추": require("../Images/4.png"),
-        "사과": require("../Images/5.png"),
-        "고추": require("../Images/6.png"),
-    };
-
-    // 사용자 재배작물 조회
     useEffect(() => {
         const fetchDiary = () => {
             const token = localStorage.getItem("token");
             const userId = 1;
-
 
             axios
                 .get('http://43.201.122.113:8081/api/diary/user-crops', {
@@ -43,32 +30,22 @@ const CropSelectionPage = () => {
                     console.error("일기 데이터 오류 :", error);
                 });
         };
-        console.log("setCrops:",crops)
+        console.log("setCrops:",setCrops)
         fetchDiary();
     }, []);
 
-
-    // 작물 선택 핸들러
     const handleCropSelection = (crop) => {
         localStorage.setItem("selectedCrop", JSON.stringify(crop));
         navigate("/diary/newDiary");
     };
 
-    // 검색어 변경 핸들러
     const onChange = (e) => {
         setSearch(e.target.value);
     };
 
-    // 작물 필터링
     const filteredCrops = crops.filter(crop =>
         crop.cropName.toLowerCase().includes(search.toLowerCase())
     );
-
-    // 3개씩 그룹화
-    const chunkedItems = [];
-    for (let i = 0; i < filteredCrops.length; i += 3) {
-        chunkedItems.push(filteredCrops.slice(i, i + 3));
-    }
 
     return (
         <div className={style.cropSelectionPage}>
@@ -103,23 +80,19 @@ const CropSelectionPage = () => {
                 {filteredCrops.length === 0 ? (
                     <p>검색 결과가 없습니다.</p>
                 ) : (
-                    chunkedItems.map((chunk, index) => (
-                        <div key={index} className={style.chunkedCropGroup}>
-                            {chunk.map((crop) => (
-                                <div key={crop.id}>
-                                    <div
-                                        className={style.cropItem}
-                                        onClick={() => handleCropSelection(crop)}
-                                    >
-                                        <img
-                                            src={cropIMG[crop.cropName]}
-                                            alt={crop.cropName}
-                                            className={style.cropImage}
-                                        />
-                                    </div>
-                                    <p className={style.cropName}>{crop.cropName}</p>
-                                </div>
-                            ))}
+                    filteredCrops.map((crop) => (
+                        <div key={crop.id}>
+                            <div
+                                className={style.cropItem}
+                                onClick={() => handleCropSelection(crop)}
+                            >
+                                <img
+                                    src={`/images/${crop.cropName}.png`}
+                                    alt={crop.cropName}
+                                    className={style.cropImage}
+                                />
+                            </div>
+                            <p className={style.cropName}>{crop.cropName}</p>
                         </div>
                     ))
                 )}
