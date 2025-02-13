@@ -1,0 +1,120 @@
+/* myChoice.module.css */
+.p{
+    font-size: 16px;
+}
+.cropSelectionPage{
+    background-color: white;
+    height: 100vh;
+}
+.cropSelectDiaryTitle{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+.cropSelectDiaryTitleText{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 16px 21px 16px 0;
+
+}
+.cropSelectDiaryTitleIcon{
+    margin-left: 21px;
+}
+.cropSelectionPage {
+    text-align: center;
+}
+
+.cropList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 25px auto;
+    width: 400px;
+}
+
+.cropItem {
+    cursor: pointer;
+    border-radius: 100px;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    background-color: #F6F6F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cropItem:hover {
+    transform: scale(1.05);
+}
+
+.cropImage {
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+}
+
+.cropSelectTitleText{
+    font-size: 24px;
+    text-align:left;
+    margin: 45px 25px 20px
+}
+.searchInputWrapper {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #F2F4F7;
+    margin-bottom: 20px;
+    width: 90%;
+
+}
+.searchInputbox{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.searchIcon {
+    font-size: 1.2rem;
+    margin: 10px;
+    color: black;
+}
+
+.searchInput {
+    width: 90%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px;
+    color: black;
+    background-color: #F2F4F7;
+}
+.mycropsListText{
+    font-size: 16px;
+    font-weight: bold;
+    text-align:left;
+    margin: 30px 25px;
+}
+.cropName{
+    margin: 10px 0;
+}
+
+
+.submitButton {
+    width: 90%;
+    height: 7%;
+    border-radius: 10px;
+    background-color: #1BA639;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30%;
+}

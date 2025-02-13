@@ -1,60 +1,40 @@
-.slider_container {
-  margin: 10px 10px;
-  padding: 15px;
-  background-color: #F0F0F0;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex; /* ✅ 가로 정렬 추가 */
-  align-items: center;    
+.cropListContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.slider_header {
+.sliderHeader_left {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-shrink: 0; /* ✅ 텍스트가 줄어들지 않도록 고정 */
+  align-items: flex-start; 
+  width: 40%;
 }
 
-.slider_header h3 {
-  font-size: 18px;
-  font-weight: bold;
-  white-space: nowrap; /* ✅ 텍스트 줄바꿈 방지 */
+.cropRow {
+  display: flex;
+  justify-content: space-around; 
+  align-items: center; 
+  flex-wrap: wrap; 
+  width: 60%; 
 }
 
-.slider_header span {
-    font-size: 16px;
-    text-decoration: underline;
-}
-
-.view_all {
-  font-size: 14px;
-  color: gray;
+.cropItem {
   cursor: pointer;
-  white-space: nowrap;
+  transition: transform 0.3s ease;
+  width: 10%; 
 }
 
-.custom_slider {
-  flex-grow: 1; /* ✅ 슬라이더가 남은 공간을 차지하도록 설정 */
-  overflow: hidden;
-  display: flex;
-  justify-content: flex-start;
+.cropItem:hover {
+  transform: scale(1.1);
 }
 
-.slider_item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80px; /* ✅ 가로 크기 줄임 */
-  padding: 5px;
-  text-align: center;
-  margin-right: 10px;
+.cropImage {
+  width: 100%;
+  height: auto; 
 }
 
-.slider_image {
-  width: 60px; /* ✅ 이미지 크기 조정 */
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
+.sliderHeader_left h3, .sliderHeader_left p {
+  margin: 0 0 10px 0;
 }
-

@@ -20,6 +20,8 @@ class WeatherInfo extends Component {
     this.state = {
       weatherData: null,
       error: null,
+      maxTemp: localStorage.getItem('maxTemp') || null,
+      minTemp: localStorage.getItem('minTemp') || null,
     };
   }
 
@@ -53,7 +55,21 @@ class WeatherInfo extends Component {
       );
 
       console.log("날씨 API 응답:", response.data);
-      this.setState({ weatherData: response.data });
+      
+      // 현재 온도를 기준으로 최고/최저 온도 계산
+      const currentTemp = response.data.current.temp_c;
+      const maxTemp = Math.round(currentTemp + 3);
+      const minTemp = Math.round(currentTemp - 3);
+
+      // 로컬 스토리지에 저장
+      localStorage.setItem('maxTemp', maxTemp);
+      localStorage.setItem('minTemp', minTemp);
+
+      this.setState({ 
+        weatherData: response.data,
+        maxTemp,
+        minTemp
+      });
     } catch (error) {
       console.error(
         "API 요청 실패:",
@@ -103,7 +119,7 @@ class WeatherInfo extends Component {
   };
 
   render() {
-    const { weatherData, error } = this.state;
+    const { weatherData, error, maxTemp, minTemp } = this.state;
 
     if (error) {
       return <p>{error}</p>;
@@ -138,8 +154,7 @@ class WeatherInfo extends Component {
 
             {/* 최고/최저 온도 */}
             <p className={style.weather_temp}>
-              {Math.round(weatherData.current.temp_c + 3)}° /{" "}
-              {Math.round(weatherData.current.temp_c - 3)}°
+              {maxTemp}° / {minTemp}°
             </p>
 
             {/* 강수 확률 & 바람 (소수점 제거) */}
@@ -149,7 +164,7 @@ class WeatherInfo extends Component {
             </p>
           </div>
 
-          {/* 날씨 아이콘 (크기 키움) */}
+          {/* 날씨 아이콘 */}
           <div className={style.weather_icon}>
             <img
               src={weatherImage}

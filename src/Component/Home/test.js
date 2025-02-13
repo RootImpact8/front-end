@@ -22,7 +22,7 @@ class Test extends Component {
 
   fetchLocation = async () => {
     const token = localStorage.getItem("token");
-    const url = "http://43.201.122.113:8081/api/user-info/location";
+    const url = "http://43.201.122.113:8081/api/user-info/user-crops";
     try {
       const response = await axios.get(url, {
         headers: {
@@ -36,46 +36,46 @@ class Test extends Component {
     }
   };
 
-  fetchPrice = async () => {
-    const token = localStorage.getItem("token");
-    const url = "http://43.201.122.113:8081/api/farm/price?cropName=딸기";
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const priceData = [
-        {
-          date: response.data.previousDate,
-          price: response.data.previousPrice,
-        },
-        { date: response.data.currentDate, price: response.data.currentPrice },
-      ];
-      this.setState({ priceInfo: priceData, loading: false });
-    } catch (error) {
-      this.setState({ error: error.toString(), loading: false });
-    }
-  };
+  // fetchPrice = async () => {
+  //   const token = localStorage.getItem("token");
+  //   const url = "http://43.201.122.113:8081/api/farm/price?cropName=딸기";
+  //   try {
+  //     const response = await axios.get(url, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const priceData = [
+  //       {
+  //         date: response.data.previousDate,
+  //         price: response.data.previousPrice,
+  //       },
+  //       { date: response.data.currentDate, price: response.data.currentPrice },
+  //     ];
+  //     this.setState({ priceInfo: priceData, loading: false });
+  //   } catch (error) {
+  //     this.setState({ error: error.toString(), loading: false });
+  //   }
+  // };
 
-  fetchNews = async () => {
-    const token = localStorage.getItem("token");
-    const cropName = "딸기";
-    const url = `http://43.201.122.113:8081/api/farm/crop-news?cropId=1`;
-    try {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      });
-      this.setState({ news: response.data.news, loading: false });
-    } catch (error) {
-      console.log("Error details:", error.response);
-      this.setState({ error: error.toString(), loading: false });
-    }
-  };
+  // fetchNews = async () => {
+  //   const token = localStorage.getItem("token");
+  //   const cropName = "딸기";
+  //   const url = `http://43.201.122.113:8081/api/farm/crop-news?cropId=1`;
+  //   try {
+  //     const response = await axios.get(url, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json',
+  //       },
+  //     });
+  //     this.setState({ news: response.data.news, loading: false });
+  //   } catch (error) {
+  //     console.log("Error details:", error.response);
+  //     this.setState({ error: error.toString(), loading: false });
+  //   }
+  // };
 
   initializeGeolocation = () => {
     if ("geolocation" in navigator) {

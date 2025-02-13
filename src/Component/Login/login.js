@@ -19,12 +19,17 @@ const Login = () => {
         password,
       });
 
-      const { email: userEmail, token, message } = response.data;
+      const { email: userEmail, token, message, id } = response.data;
+
+      console.log(userEmail, token, message, id);
+      
+      
 
       console.log("로그인 성공:", message);
 
       localStorage.setItem("email", userEmail);
       localStorage.setItem("token", token);
+      localStorage.setItem("id", id);
 
       navigate("/");
     } catch (error) {

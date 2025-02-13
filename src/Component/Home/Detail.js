@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import style from "./Detail.module.css";
+
 import heart from "../Images/heart.png";
 import heart_true from "../Images/heart_true.png";
 import sns from "../Images/sns.png";
@@ -20,14 +21,18 @@ class Detail extends Component {
       isHeartClicked: !prevState.isHeartClicked, // 상태 토글
     }));
   };
+
+  handleGoBack = () => {
+    window.history.back();
+  };
   
   render() {
     const { isHeartClicked } = this.state;
     return (
-      <div>
-        <div>
+      <div className={style.detial_container}>
+        <div className={style.detail_header_container}>
           <header className={style.header}>
-            <img src={back} alt="Back" className={style.icon} />
+            <img src={back} alt="Back" className={style.icon} onClick={this.handleGoBack}/>
             <div className={style.iconsRight}>
               <img
                 src={isHeartClicked ? heart_true : heart} // 조건부 렌더링

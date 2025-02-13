@@ -24,6 +24,9 @@ import Details from "./Component/diary/Details";
 import Diary_crops from "./Component/diary_crops/diary_crops";
 import NewDiary from "./Component/diary/newDiary";
 
+import MyChoice from './Component/info/myChoice';
+import InterestCrops from './Component/info/InterestCrops';
+
 
 
 
@@ -39,7 +42,7 @@ function AppContent() {
   const location = useLocation();
 
   // Footer를 표시할 경로 목록
-  const showFooterPages = ["/", "/diary",  "/Detail"];
+  const showFooterPages = ["/", "/diary",  "/Detail", "/info"];
 
   return (
       <div style={{ backgroundColor: "#F0F0F0", minHeight: "100vh" }}>
@@ -59,6 +62,8 @@ function AppContent() {
           <Route path="/diary/activity-selection" element={<ActivitySelection />} />
           <Route path="/address" element={<Address />} />
           <Route path="/Test" element={<Test />} />
+          <Route path="/MyChoice" element={<MyChoice />} />
+          <Route path="/InterestCrops" element={<InterestCrops />} />
         </Routes>
 
 

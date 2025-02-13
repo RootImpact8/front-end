@@ -2,7 +2,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 70px;
+    height: 100%;
 }
 
 .header_container {
@@ -13,12 +13,12 @@ header {
 }
 
 .header_text1 {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .header_text2 {
-    font-size: 26px;
+    font-size: 22px;
 }
 
 .Logo_image {

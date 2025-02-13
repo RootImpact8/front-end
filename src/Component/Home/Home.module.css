@@ -1,8 +1,8 @@
 .home_header_container {
   height: 60px; 
-  margin-left: 20px;
-  margin-right: 20px;
-  background-color: #F0F0F0;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: white;
 }
 
 .home_LogoImg {
@@ -37,7 +37,7 @@
   border: 1px none black;
   background-color: #FFFFFF;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 1.2;
   max-width: 100%;
@@ -126,7 +126,7 @@ height: auto;
 overflow-y: auto; 
 scrollbar-width: none; 
 -ms-overflow-style: none; 
-min-height: 170vh; /* 최소 높이 설정 */
+min-height: 150vh; /* 최소 높이 설정 */
 height: auto; /* 컨텐츠 양에 따라 자동 조절 */
 overflow-y: auto; /* 내용이 많아지면 스크롤 가능 */
 scrollbar-width: thin; 
@@ -169,7 +169,7 @@ width: 6px;
   display: flex;
   flex-direction: column;
   width: 85%;
-  height: 170px;
+  height: 200px;
 }
 
 .abnormal_weather_header {
